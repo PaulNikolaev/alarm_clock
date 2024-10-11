@@ -7,7 +7,9 @@ import pygame
 
 
 def set_reminder():
-    rem = sd.askstring('Время напоминания', 'Введите время в формате: чч:мм (в 24-часовом формате)').split(':')
+    global t
+    rem = sd.askstring('Время напоминания',
+                       'Введите время в формате: чч:мм (в 24-часовом формате)').split(':')
     if rem:
         try:
             hour, minute = int(rem[0]), int(rem[1])
@@ -18,7 +20,17 @@ def set_reminder():
             mb.showerror('Ошибка!', f'Произошла ошибка: {e}!')
 
 
+def check():
+    global t
+    if t:
+        now = time.time()
+        if now >= t:
+            play_snd()
+            t = 0
+    window.after(10000, check())
 
+
+t = 0
 window = Tk()
 window.title('Будильник')
 window.config(bg='white')
