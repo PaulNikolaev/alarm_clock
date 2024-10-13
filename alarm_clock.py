@@ -26,8 +26,8 @@ def check():
         now = time.time()
         if now >= t:
             play_snd()
-            t = None
-    window.after(10000, check)
+            t = 0
+    window.after(10000, check())
 
 
 def play_snd():
@@ -45,7 +45,5 @@ label = Label(window, text='Напоминание', font=('Arial', 16), bg='whi
 label.pack(pady=10)
 set_button = Button(window, text='Установить напоминание', font=('Arial', 14), command=set_reminder)
 set_button.pack(padx=10, pady=(0, 10))
-
-check()
 
 window.mainloop()
